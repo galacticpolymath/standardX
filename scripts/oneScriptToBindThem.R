@@ -5,8 +5,8 @@ math<-read.csv("data/formatted_CommonCoreMath.csv")
 sci<-read.csv("data/formatted_ngss.csv",quote="\"")
 sdg<-read.csv("data/SDG-targets.csv")
 names(sdg)[c(2,3)]<-c("code","statement")
-sdg$dimension=sapply(sdg$goal,function(x) switch(x,"1"="No Poverty","2"="Zero Hunger","3"="Good Health and Well-Being","4"="Quality Education","5"="Gender Equality","6"="Clean Water and Sanitation","7"="Affordable and Clean Energy","8"="Decent Work and Economic Growth","9"="Industry, Innovation, and Infrastructure","10"="Reduced Inequalities","11"="Sustainable Cities and Communities","12"="Responsible Consumption and Production","13"="Climate Action","14"="Life Below Water","15"="Life on Land","16"="Peace, Justice, and Strong Institutions","17"="Partnerships for the Goals"))
-sdg$dim<-gsub("[a-z]| |-|,","",sdg$dimension)
+sdg$subcat=sapply(sdg$goal,function(x) switch(x,"1"="No Poverty","2"="Zero Hunger","3"="Good Health and Well-Being","4"="Quality Education","5"="Gender Equality","6"="Clean Water and Sanitation","7"="Affordable and Clean Energy","8"="Decent Work and Economic Growth","9"="Industry, Innovation, and Infrastructure","10"="Reduced Inequalities","11"="Sustainable Cities and Communities","12"="Responsible Consumption and Production","13"="Climate Action","14"="Life Below Water","15"="Life on Land","16"="Peace, Justice, and Strong Institutions","17"="Partnerships for the Goals"))
+# sdg$dim<-gsub("[a-z]| |-|,","",sdg$subcat)
 
 c3$subject<-"Social Studies"
 c3$framework<-"C3"
@@ -46,6 +46,6 @@ nrow(steam)
 write.csv(steam,"data/formatted_allSubjects.csv",row.names=F)
 
 #Standards alignment template
-steam2<-steam %>% as_tibble()%>%rename(set=framework) %>%  mutate(ALIGN=NA,FormativeQ=NA,A_Level1=NA,A_Level2=NA,A_Level3=NA,A_Level4=NA) %>% 
-  select(ALIGN,code,set,dim,grade,statement,FormativeQ,starts_with("A_"),everything())
-write.xlsx(steam2,"data/alignToAll.xlsx",row.names=F,freezePane=list(firstActiveRow=2,firstActiveCol=6))
+steam2<-steam %>% as_tibble()%>%rename(set=framework) %>% 
+  select(code,set,dim,grade,statement,everything())
+write.xlsx(steam2,"data/allStandards.xlsx",row.names=F,freezePane=list(firstActiveRow=2,firstActiveCol=6))
