@@ -9,14 +9,14 @@ sdg$subcat=sapply(sdg$goal,function(x) switch(x,"1"="No Poverty","2"="Zero Hunge
 # sdg$dim<-gsub("[a-z]| |-|,","",sdg$subcat)
 
 c3$subject<-"Social Studies"
-c3$framework<-"C3"
+c3$set<-"C3"
 ela$subject<-"ELA"
-ela$framework<-"Common Core ELA"
+ela$set<-"Common Core ELA"
 math$subject <- "Math"
-math$framework<-"Common Core Math"
+math$set<-"Common Core Math"
 sci$subject <- "Science"
-sci$framework<-"NGSS"
-sdg$framework <- "SDGs"
+sci$set<-"NGSS"
+sdg$set <- "SDGs"
 sdg$subject<-NA
 
 #NGSS statement codes have weird apostrophes and long em dash that caused probs ’ b4 I saved as csv w/ utf-8! This code is left over from those weird import issues
@@ -35,7 +35,7 @@ sdg$subject<-NA
 # sapply(sci$statement,function(x) length(grep("\xd2|\xd3",x,fixed=F,useBytes=T))) %>% sum()
 
 
-steam<-full_join(c3,ela) %>% full_join(math) %>% full_join(sci) %>% full_join(sdg)%>% select(subject,framework,grade,dimension, dim,subcategory,everything())
+steam<-full_join(c3,ela) %>% full_join(math) %>% full_join(sci) %>% full_join(sdg)%>% select(code,set,dim,grade,statement,everything())
 #convert  #N/A to NA
 steam<-apply(steam,c(1,2),function(x) ifelse(x=="#N/A",NA,x))
 head(steam)
@@ -43,9 +43,8 @@ tail(steam)
 #check
 sum(sapply(list(c3,ela,math,sci,sdg),nrow))
 nrow(steam)
-write.csv(steam,"data/formatted_allSubjects.csv",row.names=F)
+write.csv(steam,"data/allStandards.csv",row.names=F)
 
-#Standards alignment template
-steam2<-steam %>% as_tibble()%>%rename(set=framework) %>% 
-  select(code,set,dim,grade,statement,everything())
-write.xlsx(steam2,"data/allStandards.xlsx",row.names=F,freezePane=list(firstActiveRow=2,firstActiveCol=6))
+# Make Excel version 
+write.xlsx(steam,"data/allStandards.xlsx",row.names=F,freezePane=list(firstActiveRow=2,firstActiveCol=6))
+
