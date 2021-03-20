@@ -35,30 +35,54 @@ sdg$subject<-NA
 # sapply(sci$statement,function(x) length(grep("\xd2|\xd3",x,fixed=F,useBytes=T))) %>% sum()
 
 
-steam<-full_join(c3,ela) %>% full_join(math) %>% full_join(sci) %>% full_join(sdg)%>% select(code,set,dim,grade,statement,everything())
+allSubj<-full_join(c3,ela) %>% full_join(math) %>% full_join(sci) %>% full_join(sdg)%>% select(code,set,dim,grade,statement,everything())
 #convert  #N/A to NA
-steam<-apply(steam,c(1,2),function(x) ifelse(x=="#N/A",NA,x))
+allSubj<-apply(allSubj,c(1,2),function(x) ifelse(x=="#N/A",NA,x)) %>% as_tibble()
 
+######
 #remove HTML tags! (these are in common core standards, adding italics and whatnot,
 #but they're problematic and don't render in javascript)
 
-#show example:
-steam[1587,"statement"] #sup and i tags need to go
+#special problem is Common Core has footnotes (i.e. <sup>1</sup> referring to source 1)
+#also sometimes <sup> refers to an exponent, which we want to keep...so first delete footnotes
+#which fortunately always happen at the end of a "."
 
-steam[,"statement"]<-steam[,"statement"] %>% stringr::str_remove_all(pattern="<[^>]*>")
+#example:
+allSubj$statement[1385]
+allSubj$statement <-allSubj$statement %>% stringr::str_replace_all("\\.<sup>.</sup>","\\.")
+allSubj$statement[1385] #it worked
+
+
+#Still remaining problem of exponents that we actually want to keep
+
+#example:
+allSubj$statement[1500]
+allSubj$statement <-allSubj$statement %>% stringr::str_replace_all("<sup>","^")
+allSubj$statement <-allSubj$statement %>% stringr::str_replace_all("</sup>","")
+allSubj$statement[1500] #successfully changed "s<sup>2</sup>" to "s^2"
+
+#Remaining problem--all other HTML tags...
+#start with italics, which we can change to markdown
+allSubj$statement[1587] # i and em tags need change to *text*
+allSubj$statement<-allSubj$statement %>% stringr::str_replace_all(pattern="<[\\/?i|\\/?em]*>","*")
 
 #check if it worked:
 #show example:
-steam[1587,"statement"]
+allSubj$statement[1587]
 #it did; but still leaving in special character codes like SQRT, i.e. "&radic;"
 
-head(steam)
-tail(steam)
+#Are there other HTML tags? Remove dem
+allSubj$statement<-allSubj$statement %>% stringr::str_remove_all(pattern="<[^>]*>")
+
+
+
+head(allSubj)
+tail(allSubj)
 #check
 sum(sapply(list(c3,ela,math,sci,sdg),nrow))
-nrow(steam)
-write.csv(steam,"data/allStandards.csv",row.names=F)
+nrow(allSubj)
+write.csv(allSubj,"data/allStandards.csv",row.names=F)
 
 # Make Excel version 
-write.xlsx(steam,"data/allStandards.xlsx",row.names=F,freezePane=list(firstActiveRow=2,firstActiveCol=6))
+write.xlsx(allSubj,"data/allStandards.xlsx",row.names=F,freezePane=list(firstActiveRow=2,firstActiveCol=6))
 
