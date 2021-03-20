@@ -1,4 +1,4 @@
-require(openxlsx);require(tidyverse);require(stringi)
+require(openxlsx);require(tidyverse);require(stringi);require(stringr)
 c3<-read.csv("data/formatted_c3SocialStudies.csv")
 ela<-read.csv("data/formatted_CommonCoreELA.csv")
 math<-read.csv("data/formatted_CommonCoreMath.csv")
@@ -38,6 +38,20 @@ sdg$subject<-NA
 steam<-full_join(c3,ela) %>% full_join(math) %>% full_join(sci) %>% full_join(sdg)%>% select(code,set,dim,grade,statement,everything())
 #convert  #N/A to NA
 steam<-apply(steam,c(1,2),function(x) ifelse(x=="#N/A",NA,x))
+
+#remove HTML tags! (these are in common core standards, adding italics and whatnot,
+#but they're problematic and don't render in javascript)
+
+#show example:
+steam[1587,"statement"] #sup and i tags need to go
+
+steam[,"statement"]<-steam[,"statement"] %>% stringr::str_remove_all(pattern="<[^>]*>")
+
+#check if it worked:
+#show example:
+steam[1587,"statement"]
+#it did; but still leaving in special character codes like SQRT, i.e. "&radic;"
+
 head(steam)
 tail(steam)
 #check
