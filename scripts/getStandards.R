@@ -8,7 +8,7 @@
 #Install/load pacman
 if(!require(pacman)){install.packages("pacman");require(pacman)}
 #Install/load tons of packages
-p_load(tidyverse,xml2,plyr,fs,XLConnect)
+p_load(tidyverse,xml2,plyr,fs,XLConnect,stringi)
 
 ###############
 # Commmon Core
@@ -16,8 +16,8 @@ p_load(tidyverse,xml2,plyr,fs,XLConnect)
 download.file("http://www.corestandards.org/wp-content/uploads/ccssi.zip",destfile=paste0(tempdir(),"/ccssi.zip"))
 #updated common core ELA and math standards now in tempdir as XML
 unzip(paste0(tempdir(),"/ccssi.zip"),exdir=tempdir())
-file_copy(paste0(tempdir(),"/ccssi/xml/math.xml"),"data/math.xml")
-file_copy(paste0(tempdir(),"/ccssi/xml/ela-literacy.xml"),"data/ela.xml")
+file_copy(paste0(tempdir(),"/ccssi/xml/math.xml"),"data/math.xml",overwrite=T)
+file_copy(paste0(tempdir(),"/ccssi/xml/ela-literacy.xml"),"data/ela.xml",overwrite=T)
 ccMath.xml<-read_xml("data/math.xml")
 ccELA.xml<-read_xml("data/ela.xml")
 
@@ -115,9 +115,17 @@ ccELA$dimension=case_when(
   ccELA$dim0%in% c("W","WHST") ~"Writing"
   )
 
-ccELA.out <- ccELA %>% mutate(dim=gsub("[a-z |,]","",dimension)) %>%filter(dim0!="CCRA")%>% mutate(orig_dimension=dimension0,orig_dim=dim0) %>%  select("grade","dimension","dim","code","statement","link","orig_dimension","orig_dim") 
+ccELA.out0 <- ccELA %>% mutate(dim=gsub("[a-z |,]","",dimension)) %>%filter(dim0!="CCRA")%>% mutate(orig_dimension=dimension0,orig_dim=dim0) %>%  select("grade","dimension","dim","code","statement","link","orig_dimension","orig_dim") 
 
-write.csv(ccELA.out,"./data/formatted_CommonCoreELA.csv",row.names = F)
+#apparently we got some duplicated standards somewhere. Let's get those outta here
+ccELA.out0$code[which(duplicated(ccELA.out0$code))]#duplicated entries
+
+ccELA.out<-ccELA.out0[-which(duplicated(ccELA.out0$code)),]
+
+#test
+ccELA.out$code[which(duplicated(ccELA.out$code))]#no duplicated entries in final output
+
+write.csv(ccELA.out,"data/formatted_CommonCoreELA.csv",row.names = F)
 
 ###############
 # NGSS

@@ -1,12 +1,15 @@
-require(openxlsx);require(tidyverse);require(stringi);require(stringr)
+require(openxlsx);require(dplyr);require(stringr);require(XLConnect)# require(stringi);
 c3<-read.csv("data/formatted_c3SocialStudies.csv")
 ela<-read.csv("data/formatted_CommonCoreELA.csv")
 math<-read.csv("data/formatted_CommonCoreMath.csv")
 sci<-read.csv("data/formatted_ngss.csv",quote="\"")
 sdg<-read.csv("data/SDG-targets.csv")
 names(sdg)[c(2,3)]<-c("code","statement")
-sdg$subcat=sapply(sdg$goal,function(x) switch(x,"1"="No Poverty","2"="Zero Hunger","3"="Good Health and Well-Being","4"="Quality Education","5"="Gender Equality","6"="Clean Water and Sanitation","7"="Affordable and Clean Energy","8"="Decent Work and Economic Growth","9"="Industry, Innovation, and Infrastructure","10"="Reduced Inequalities","11"="Sustainable Cities and Communities","12"="Responsible Consumption and Production","13"="Climate Action","14"="Life Below Water","15"="Life on Land","16"="Peace, Justice, and Strong Institutions","17"="Partnerships for the Goals"))
+sdg$subcategory=sapply(sdg$goal,function(x) switch(x,"1"="No Poverty","2"="Zero Hunger","3"="Good Health and Well-Being","4"="Quality Education","5"="Gender Equality","6"="Clean Water and Sanitation","7"="Affordable and Clean Energy","8"="Decent Work and Economic Growth","9"="Industry, Innovation, and Infrastructure","10"="Reduced Inequalities","11"="Sustainable Cities and Communities","12"="Responsible Consumption and Production","13"="Climate Action","14"="Life Below Water","15"="Life on Land","16"="Peace, Justice, and Strong Institutions","17"="Partnerships for the Goals"))
 # sdg$dim<-gsub("[a-z]| |-|,","",sdg$subcat)
+sdg$code2<-as.character(sdg$goal)
+sdg<-sdg %>% select(-goal)
+sci<-sci %>% select(-subcat)
 
 c3$subject<-"Social Studies"
 c3$set<-"C3"
@@ -18,6 +21,7 @@ sci$subject <- "Science"
 sci$set<-"NGSS"
 sdg$set <- "SDGs"
 sdg$subject<-NA
+
 
 #NGSS statement codes have weird apostrophes and long em dash that caused probs ’ b4 I saved as csv w/ utf-8! This code is left over from those weird import issues
 # test<-sci$statement[66]
@@ -48,41 +52,70 @@ allSubj<-apply(allSubj,c(1,2),function(x) ifelse(x=="#N/A",NA,x)) %>% as_tibble(
 #which fortunately always happen at the end of a "."
 
 #example:
-allSubj$statement[1385]
-allSubj$statement <-allSubj$statement %>% stringr::str_replace_all("\\.<sup>.</sup>","\\.")
-allSubj$statement[1385] #it worked
+allSubj$statement[1290] #1 example of ^1 footnote in the middle of a sentence
+allSubj$statement <-allSubj$statement %>% stringr::str_replace_all("<sup>1</sup>","") #no reason to exponent 1 except as a footnote
+allSubj$statement[1290] #it worked
+
+allSubj$statement[1313] # example of footnote at end of sentence
+allSubj$statement <-allSubj$statement %>% stringr::str_replace_all("\\.<sup>.<\\/sup>","\\.")
+allSubj$statement[1313]
+
 
 
 #Still remaining problem of exponents that we actually want to keep
 
 #example:
-allSubj$statement[1500]
+allSubj$statement[1603]
 allSubj$statement <-allSubj$statement %>% stringr::str_replace_all("<sup>","^")
 allSubj$statement <-allSubj$statement %>% stringr::str_replace_all("</sup>","")
-allSubj$statement[1500] #successfully changed "s<sup>2</sup>" to "s^2"
+allSubj$statement[1603] #successfully changed "s<sup>2</sup>" to "s^2"
 
 #Remaining problem--all other HTML tags...
 #start with italics, which we can change to markdown
-allSubj$statement[1587] # i and em tags need change to *text*
+allSubj$statement[1603] # i and em tags need change to *text*
 allSubj$statement<-allSubj$statement %>% stringr::str_replace_all(pattern="<[\\/?i|\\/?em]*>","*")
 
 #check if it worked:
 #show example:
-allSubj$statement[1587]
+allSubj$statement[1603]
 #it did; but still leaving in special character codes like SQRT, i.e. "&radic;"
 
 #Are there other HTML tags? Remove dem
 allSubj$statement<-allSubj$statement %>% stringr::str_remove_all(pattern="<[^>]*>")
-
-
 
 head(allSubj)
 tail(allSubj)
 #check
 sum(sapply(list(c3,ela,math,sci,sdg),nrow))
 nrow(allSubj)
-write.csv(allSubj,"data/allStandards.csv",row.names=F)
+
+# Export data -------------------------------------------------------------
+######################
+#Reorganize column order
+allSubj_final<-allSubj %>% relocate(code,statement, set, dim, grade, subject,dimension,subcategory,PEcode,performanceExpectation)
+# output CSV
+write.csv(allSubj_final,"allStandards.csv",row.names=F)
 
 # Make Excel version 
-write.xlsx(allSubj,"data/allStandards.xlsx",row.names=F,freezePane=list(firstActiveRow=2,firstActiveCol=6))
+write.xlsx(allSubj_final,"allStandards.xlsx",row.names=F,freezePane=list(firstRow=T))
 
+
+# Save align to standards template ----------------------------------------
+alignmentTemplate<-allSubj_final %>% mutate(ALIGN=NA) %>% relocate(ALIGN)
+
+#Load template
+alignToStndz<- XLConnect::loadWorkbook("align-to-all-subject-standards.xlsx")
+
+#save without overwriting formatting
+XLConnect::setStyleAction(alignToStndz,XLConnect::XLC$"STYLE-ACTION.NONE")
+
+#save backup
+XLConnect::saveWorkbook(alignToStndz,"data/align-to-all-subject-standards-OLD.xlsx")
+message("  *Old version of file saved at 'data/align-to-all-subject-standards-OLD.xlsx\n'")
+
+#Clear old data and update "align to all subjects template"
+deleteRange<-c(2,1,nrow(allSubj_final)+1000,ncol(allSubj_final)+10) #added extra in case we ever simplify the data set...it all gets delted
+XLConnect::clearRange(alignToStndz,sheet="Sheet1",coords=deleteRange)
+XLConnect::writeWorksheet(alignToStndz,data=allSubj_final,sheet="Sheet1",startRow = 1,startCol=2,header=T)
+XLConnect::saveWorkbook(alignToStndz,"align-to-all-subject-standards.xlsx")
+message("  @File 'align-to-all-subject-standards.xlsx' Cleared and updated")
