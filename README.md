@@ -1,10 +1,10 @@
-# standardX: Connecting standards across subjects
+repository author/maintainer: [Matt Wilkins](http://www.mattwilkinsbio.com/)
+
 <h2 id="title"> a project of
-  <span style="font-family: Montserrat;">
-  <img src="https://res.cloudinary.com/galactic-polymath/image/upload/v1616112399/logos/bubbleLogo_wShadow_noLeftMar_ovk3oe.png" width="30px"  style="vertical-align: middle;margin: auto 0; ">Galactic Polymath
-  </span>, an education studio dedicated to translating current research into highly interdisciplinary lessons that are free for teachers. 
-  <a href="https://www.galacticpolymath.com/lessons">Access lessons here.</a>
+  <span style="font-family: Montserrat;font-weight:400;">
+  <img src="https://res.cloudinary.com/galactic-polymath/image/upload/v1616112399/logos/bubbleLogo_wShadow_noLeftMar_ovk3oe.png" width="30px"  style="vertical-align: middle;margin: auto 0; ">Galactic Polymath</span>, an education studio dedicated to translating current research into highly interdisciplinary lessons that are free for teachers. 
 </h2>
+<h2><a href="https://www.galacticpolymath.com/lessons">Access lessons here.</a></h2>
 
 ### What is this?
 1. A single .xlsx file containing the major learning standards for the four main subjects in US K-12 public schools:
