@@ -1,5 +1,5 @@
 # standardX: Connecting standards across subjects
-<h2> a project of
+<h2 id="title"> a project of
   <img src="https://res.cloudinary.com/galactic-polymath/image/upload/v1616112399/logos/bubbleLogo_wShadow_noLeftMar_ovk3oe.png" width="30px"  style="vertical-align: middle;margin: auto 0; ">   
   Galactic Polymath, an education studio dedicated to translating current research into highly interdisciplinary lessons that are free for teachers. 
   <a href="https://www.galacticpolymath.com/lessons">Access lessons here.</a>

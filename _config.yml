@@ -1,6 +1,4 @@
-theme: jekyll-theme-architect
 title: StandardX
 description: A compilation of US teaching standards for English, math, science, and social studies, and the code used to generate it. Why? To make it easier to develop interdisciplinary lessons.
 show_downloads: true
-github:
-  another_url: https://raw.githubusercontent.com/galacticpolymath/standardX/master/align-to-all-subject-stnadards.xlsx
+theme: jekyll-theme-architect
