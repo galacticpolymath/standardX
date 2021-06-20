@@ -2,11 +2,19 @@
 ---
 
 @import "{{ site.theme }}";
+
+.page-header{
+  background-color: #2C83C3;
+}
+
 .main-content {
-  #title {
-    img {
-    vertical-align: middle;
-      
-    }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 ,
+  p {
+    font-family: Montserrat;
   }
 }
