@@ -1,7 +1,7 @@
-#### repository author/maintainer: [Matt Wilkins](http://www.mattwilkinsbio.com/)
+##### repository author/maintainer: [Matt Wilkins](http://www.mattwilkinsbio.com/)
 
 <h2 id="title"> a project of
-  <img src="https://res.cloudinary.com/galactic-polymath/image/upload/v1593304395/logos/GP_logo_wordmark_horiz_grad_transBG_300_lqdj7q.png" height="30px"  style="vertical-align: middle;margin: auto 0; ">, an education studio dedicated to translating current research into highly interdisciplinary lessons that are free for teachers. 
+  <img src="https://res.cloudinary.com/galactic-polymath/image/upload/v1593304395/logos/GP_logo_wordmark_horiz_grad_transBG_300_lqdj7q.png" height="30px"  style="vertical-align: middle;margin: auto 2px auto 0; ">, an education studio dedicated to translating current research into highly interdisciplinary lessons that are free for teachers. 
 </h2>
 <a href="https://www.galacticpolymath.com/lessons">Access lessons here.</a>
 
@@ -17,14 +17,14 @@
 <iframe src="https://player.vimeo.com/video/138852758" width="640" height="360" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
 <p><a href="https://vimeo.com/138852758">Malala introducing the The Worlds Largest Lesson</a> from <a href="https://vimeo.com/worldslargestlesson">World&#039;s Largest Lesson</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
 
-![The UN Sustainable development goals](http://www.teachsdgs.org/uploads/5/1/5/4/51544561/editor/01-tgg-grid-icon-color.jpg?1501603530)
+![The UN Sustainable development goals](assets/sdgPoster.png)
 
 [Learn more at teachsdgs.org](http://www.teachsdgs.org/)
 
 3. R scripts used to aggregate these data. Note the repo I got the SDGs from is no longer online.
 
 ## Motivations
-As a [published researcher](https://scholar.google.com/citations?user=MZKGDvAAAAAJ&hl=en), I readily recognize that science without math makes no sense; science not communicated well does not move us forward; and science and society are influenced by each other in myriad ways. It's absolutely nuts that any of these subject should be taught in isolation—it hurts long-term retention because students don't see the value of isolated knowledge, and it doesn't prepare them for how problems will be encountered in the workplace. Yet, in 2021 lessons are still about as siloed as it was when I was a kid. 
+As a [published researcher](https://scholar.google.com/citations?user=MZKGDvAAAAAJ&hl=en), I readily recognize that science without math makes no sense; science not communicated well does not move us forward; and science and society are influenced by each other in myriad ways. It's absolutely nuts that any of these subjects should be taught in isolation—it hurts long-term retention because students don't see the value of isolated knowledge, and it doesn't prepare students for how problems will be encountered outside of school and in the workplace. Yet, in 2021 lessons are still about as siloed as they were when I was a kid. Why is that?
 
 Through my work with Vanderbilt University's Collaborative for STEM Education and Outreach, I had the unique opportunity to develop and teach interdisciplinary lessons in collaboration with teachers as a Resident Scientist at a middle school 5-days a week for 3 1/2 years. This was a fantastic experience, and I found that teachers and students were both very excited about the types of interdisciplinary lessons we were able to develop together. But part of the reason this was possible is that teachers were encouraged to work with me by their colleagues and the principal. It was understood that there would be a rich learning experience from bringing me into the classroom because I'm an expert who has a lot of creative ideas for blending together data, real-world problems, and human narratives. But for an unfamiliar English teacher to see the value in a lesson about [misinformation related to the correlation between hurricane intensity and climate change](https://docs.google.com/document/d/1uMYhNRgJbLd4Xnwx4yy5D71lioL6KyFTAWU5ZeA-cuA/edit#heading=h.fkzf9dxy3fcg), things needed to be aligned to English standards. But wouldn't this lesson fit just as easily in a science or social studies classroom? Couldn't it be designed in alignment to all subjects at once?
 
@@ -48,7 +48,7 @@ Neither I (Matt Wilkins) nor Galactic Polymath claim any copyright to any of the
 
 ## Download and Explore
 ## Click the image below to download, explore and align lessons to the final collection of 2,534 standards for K-12:
-<a href="https://raw.githubusercontent.com/galacticpolymath/standardX/master/align-to-all-subject-stnadards.xlsx" download>
-<img src="data/standards_screenshot.png" alt="screenshot of an Excel spreadsheet with code, standard statements and other standards information for a few math and science standards">
+<a href="https://raw.githubusercontent.com/galacticpolymath/standardX/master/align-to-all-subject-standards.xlsx" download>
+<img src="assets/standards_screenshot.png" alt="screenshot of an Excel spreadsheet with code, standard statements and other standards information for a few math and science standards">
 </a>
 <a href="https://raw.githubusercontent.com/galacticpolymath/standardX/master/align-to-all-subject-standards.xlsx" download> > align-to-all-subject-standards.xlsx</a>
