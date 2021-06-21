@@ -18,14 +18,11 @@ layout: default
 - [Common Core Math](http://www.corestandards.org/Math/)
 - [College, Career, and Civic Life (C3) Social Studies Framework](https://www.socialstudies.org/standards/c3)
 
-2. I've also included the UN Sustainable Development Goals. These are incredibly ambitious goals set by the international community to (among other things) eliminate poverty, hunger, gender inequality, fight climate change, and preserve 10% of terrestrial and marine habitat by 2030. These goals are aspirational, of course, but students need to see that there's hope and solutions to all the depressing problems we hear about on a daily basis. Here's a succinct, and inspiring explanation of why we should #teachSDGs by human rights advocate Malala Yousafzai:
+2. I've also included the UN Sustainable Development Goals. These are incredibly ambitious goals set by the international community to (among other things) eliminate poverty, hunger, gender inequality, fight climate change, and preserve 10% of terrestrial and marine habitat by 2030. These goals are aspirational, of course, but students need to see that there's hope and solutions to all the depressing problems we hear about on a daily basis. Here's a succinct, and inspiring explanation of why we should #teachSDGs by human rights advocate [Malala Yousafzai](https://vimeo.com/worldslargestlesson).
 
-<iframe src="https://player.vimeo.com/video/138852758" width="640" height="360" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
-<p><a href="https://vimeo.com/138852758">Malala introducing the The Worlds Largest Lesson</a> from <a href="https://vimeo.com/worldslargestlesson">World&#039;s Largest Lesson</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
+    ![The UN Sustainable development goals](assets/sdgPoster.png)
 
-![The UN Sustainable development goals](assets/sdgPoster.png)
-
-[Learn more at teachsdgs.org](http://www.teachsdgs.org/)
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Learn more at teachsdgs.org](http://www.teachsdgs.org/)
 
 3. R scripts used to aggregate these data. Note the repo I got the SDGs from is no longer online.
 
