@@ -32,7 +32,10 @@ github_username:  galacticpolymath
 # Build settings
 theme: jekyll-theme-architect
 show_downloads: true
+github:
+  download_url: https://raw.githubusercontent.com/galacticpolymath/standardX/master/align-to-all-subject-standards.xlsx
 plugins:
+  - jemoji
  # - jekyll-feed
 
 # Exclude from processing.

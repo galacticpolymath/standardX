@@ -53,7 +53,7 @@ Neither I (Matt Wilkins) nor Galactic Polymath claim any copyright to any of the
 - C3 standards were provided by [John Lee, PhD](https://ced.ncsu.edu/people/jklee/) through helpful communications with Dr. Kathy Swan
 
 ## Download and Explore
-## Click the image below to download, explore and align lessons to the final collection of 2,534 standards for K-12:
+Click the image below to download, explore and align lessons to the final collection of 2,534 standards for K-12:
 <a href="https://raw.githubusercontent.com/galacticpolymath/standardX/master/align-to-all-subject-standards.xlsx" download>
 <img src="assets/standards_screenshot.png" alt="screenshot of an Excel spreadsheet with code, standard statements and other standards information for a few math and science standards">
 </a>
