@@ -47,7 +47,7 @@ Neither I (Matt Wilkins) nor Galactic Polymath claim any copyright to any of the
 
 ## Acknowledgements
 - NGSS standards data were provided by Ted Willard. Codes for cross-cutting-concepts follow the system he developed for his book [*The NSTA Atlas of the Three Dimensions*](https://my.nsta.org/resource/117948).
-- C3 standards were provided by [John Lee, PhD](https://ced.ncsu.edu/people/jklee/) through helpful communications with Dr. Kathy Swan
+- C3 standards were provided by [John Lee, PhD](https://ced.ncsu.edu/people/jklee/) through helpful communications with Dr. Kathy Swan.
 
 ## Download and Explore
 Click the image below to download, explore and align lessons to the final collection of 2,534 standards for K-12:
