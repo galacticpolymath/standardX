@@ -1,4 +1,4 @@
-##### repository author/maintainer: [Matt Wilkins](http://www.mattwilkinsbio.com/)
+repository author/maintainer: [Matt Wilkins](www.mattwilkinsbio.com)
 
 <h2 id="title"> a project of
   <img src="https://res.cloudinary.com/galactic-polymath/image/upload/v1593304395/logos/GP_logo_wordmark_horiz_grad_transBG_300_lqdj7q.png" height="30px"  style="vertical-align: middle;margin: auto 2px auto 0; ">, an education studio dedicated to translating current research into highly interdisciplinary lessons that are free for teachers. 
@@ -45,7 +45,7 @@ Neither I (Matt Wilkins) nor Galactic Polymath claim any copyright to any of the
 - C3 standards were provided by [John Lee, PhD](https://ced.ncsu.edu/people/jklee/) through helpful communications with Dr. Kathy Swan
 
 ## Download and Explore
-## Click the image below to download, explore and align lessons to the final collection of 2,534 standards for K-12:
+#### Click the image below to download, explore and align lessons to the final collection of 2,534 standards for K-12:
 <a href="https://raw.githubusercontent.com/galacticpolymath/standardX/master/align-to-all-subject-standards.xlsx" download>
 <img src="assets/standards_screenshot.png" alt="screenshot of an Excel spreadsheet with code, standard statements and other standards information for a few math and science standards">
 </a>
