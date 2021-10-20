@@ -170,21 +170,3 @@ write.csv(ccELA.out,"data/formatted_CommonCoreELA.csv",row.names = F)
 # 
 
 
-##############
-# Sustainable Development Goals
-#############
-download.file("https://raw.githubusercontent.com/datapopalliance/SDGs/master/SDG-targets.csv",destfile = "data/SDG-targets.csv")
-download.file("https://raw.githubusercontent.com/datapopalliance/SDGs/master/SDG-indicators_proposed-2016-03-24.csv",destfile = "data/SDG-indicators_proposed-2016-03-24.csv")
-
-sdg<-read.csv("data/SDG-targets.csv")
-sdg_indicators<-read.csv("data/SDG-indicators_proposed-2016-03-24.csv")
-
-# #combine standards in one XLSX file
-# fileOut<-"data/STEAMstandards.xlsx"
-# xlsx<-loadWorkbook(fileOut,create=T)
-# standardsL<-list(ccELA,ccMath,sdg)
-# lapply(standardsL,function(x),
-#        {createSheet(xlsx,name=basename(tools::file_path_sans_ext(fileOut)))})
-# combStandards<-do.call(rbind.data.frame,list(ccELA,ccMath,sdg))
-
-
