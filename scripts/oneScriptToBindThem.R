@@ -94,8 +94,8 @@ nrow(allSubj)
 
 # Export data -------------------------------------------------------------
 ######################
-#Reorganize column order
-allSubj_final<-allSubj %>% relocate(code,statement, set, dim, grade, subject,dimension,subcategory,PEcode,performanceExpectation)
+#Reorganize column order and remove some unnecessary things
+allSubj_final<-allSubj %>% relocate(code,statement, set, dim, grade, subject,dimension,subcategory,PEcode,performanceExpectation,clarifyingStatement,assessmentBoundary) %>% select(-c(orig_dim,code2))
 # output CSV
 write.csv(allSubj_final,"allStandards.csv",row.names=F)
 
@@ -139,7 +139,29 @@ good_rows <- sapply(allSubj_final$grade, function(gr) {
 })
 #Test it
 data.frame(grade=allSubj_final$grade,included=ifelse(good_rows,"YES","no"))
+#assign it
 gp_standards<-allSubj_final[good_rows,]
+
+# Add grade band to final data set ----------------------------------------
+gradeBandBreaks<-list(5:6,7:8,9:12)
+gradeBandTxt<-sapply(gradeBandBreaks,function(x) paste0(x[1],"-",x[length(x)]))
+gradeL <- unlist(sapply(gp_standards$grade, function(x) {
+  #Ignore K-12 wide standards for assigning grade bands
+  if (grepl("K", x, ignore.case = TRUE)) {
+    "K-12"
+  } else{
+    grades <- unlist(strsplit(x, ",", fixed = T))
+    bands<-sapply(grades, function(g_i) {
+      hits = unlist(sapply(gradeBandBreaks,g_i, FUN=function(brk,g_i) {
+        as.numeric(g_i) %in% brk
+      }))
+      gradeBandTxt[which(hits)]
+    })
+    unique(bands)[1]#just take the first (lowest grade band if there's a conflict)
+  }
+}))
+
+gp_standards$gradeBand<-sapply(gradeL,function(x) paste(x,collapse=","))%>% unlist()
 #write it
 openxlsx::write.xlsx(gp_standards,"data/gp_standards.xlsx",overwrite=T)
 
